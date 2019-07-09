@@ -39,7 +39,25 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'catalogo',
     'rest_framework',
+     # Necesario para allauth
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # Sólo queremos activar la validación de las siguientes
+    # redes sociales ...
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.instagram',
+    'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.linkedin_oauth2',
+    'allauth.socialaccount.providers.twitter',
 ]
+
+# Necesario para allauth
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,6 +100,14 @@ DATABASES = {
     }
 }
 
+# Necesario para allauth
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -123,3 +149,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/home/frankymoustro/Biblioteca/static'
 # Se define la URL para login
 LOGIN_URL = "/login/"
+
+# Necesario para allauth
+LOGIN_REDIRECT_URL = "/"
